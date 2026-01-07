@@ -12,10 +12,49 @@ def read_file(file_name: str) -> list[str]:
         return []
 
 
+def add_invalid_ids(id_range: str) -> int:
+    sum = 0
+    min_range, max_range = id_range.split('-')
+    digits_min = len(min_range)
+    digits_max = len(max_range)
+
+    # Both ranges are of the same number of digits and the number of digits are odd
+    if digits_min == digits_max and digits_min % 2 == 1:
+        return sum
+
+    # To be used to compare when either the min or the max range is odd
+    hold_min = min_range
+    hold_max = max_range
+
+    if digits_min % 2 == 1:
+        hold_min = "1" + ("0" * (digits_min))
+    if digits_max % 2 == 1:
+        hold_max = "9" * (digits_max - 1)
+
+    half_min_l = hold_min[0:len(hold_min)//2]
+    half_min_r = hold_min[len(hold_min)//2:]
+    half_max_l = hold_max[0:len(hold_max)//2]
+    half_max_r = hold_max[len(hold_max)//2:]
+
+    for index, i in enumerate(range(int(half_min_l), int(half_max_l) + 1)):
+        if index == 0 and i < int(half_min_r):
+            continue
+        elif index == len(range(int(half_min_l), int(half_max_l) + 1)) - 1 and i > int(half_max_r):
+            continue
+        else:
+            sum += int(str(i)*2)
+    return sum
+
+
 def main() -> None:
     file_name = "day2-1"
+    # file_name = "test-2"
     product_ids = read_file(file_name)
-    print(product_ids)
+    total = 0
+    for ranges in product_ids:
+        sum_invalid_ids = add_invalid_ids(ranges)
+        total += sum_invalid_ids
+    print(total)
 
 
 if __name__ == "__main__":
