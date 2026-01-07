@@ -1,7 +1,7 @@
 from pathlib import Path
 import csv
 
-def read_file(file_name: str) -> list[str]:
+def read_file(file_name: Path) -> list[str]:
     path = Path(file_name)
     try:
         with open(path, "r", encoding="utf-8") as file:
@@ -70,7 +70,6 @@ def add_invalid_ids(id_range: str) -> int:
                 continue
 
             # Generate invalid ids
-            print(split, 10**(split-1), 10**split)
             for pattern in range(10 ** (split - 1), 10 ** split):
                 invalid_id = int(str(pattern) * multiplier)
 
@@ -82,8 +81,9 @@ def add_invalid_ids(id_range: str) -> int:
     return sum(invalids)
 
 def main() -> None:
-    file_name = "input-2"
-    # file_name = "test-2"
+    here = Path(__file__).parent
+    file_name = here / "input-2"
+    # file_name = here / "test-2"
     product_ids = read_file(file_name)
     total = sum(add_invalid_ids(id_range) for id_range in product_ids)
     print(total)

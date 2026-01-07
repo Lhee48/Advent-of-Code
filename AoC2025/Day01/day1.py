@@ -1,4 +1,5 @@
-from utils import read_file
+from pathlib import Path
+from AoC2025.Utils.utils import read_file
 
 
 def count_target(instructions: list[str], right_limit = 100, target = 0, start = 50) -> int:
@@ -31,8 +32,9 @@ def count_target(instructions: list[str], right_limit = 100, target = 0, start =
 
 
 def main() -> None:
-    file_name = "input-1"
-    # file_name = "test-1"
+    here = Path(__file__).parent
+    file_name = here / "input-1"
+    # file_name = here / "test-1"
     instructions = read_file(file_name)
     ans = count_target(instructions)
     print(ans)
