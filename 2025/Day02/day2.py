@@ -82,8 +82,8 @@ def add_invalid_ids(id_range: str) -> int:
     return sum(invalids)
 
 def main() -> None:
-    # file_name = "day2-1"
-    file_name = "test-2"
+    file_name = "input-2"
+    # file_name = "test-2"
     product_ids = read_file(file_name)
     total = sum(add_invalid_ids(id_range) for id_range in product_ids)
     print(total)

@@ -31,7 +31,7 @@ def count_target(instructions: list[str], right_limit = 100, target = 0, start =
 
 
 def main() -> None:
-    file_name = "day1-1"
+    file_name = "input-1"
     # file_name = "test-1"
     instructions = read_file(file_name)
     ans = count_target(instructions)
